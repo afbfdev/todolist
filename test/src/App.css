@@ -1,64 +1,49 @@
-.barre {
-  text-decoration: line-through ;
-  color: rgb(238, 255, 0);
-  background-color: inherit;
-}
 
 .App {
-  text-align: center;
-}
-
-.tache{
-  background-color: rgb(75, 167, 41);
+  width: 90%;
+  margin: 0 auto;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
-  
+  flex-direction: column;
+  background-color: rgb(164, 224, 239);
 }
 
-.del {
-  background-color: inherit;
-  cursor: pointer;
-  opacity: 0.8;
+.App h1 {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-.del:hover{
-  color: rgb(253, 10, 10);
+.App-form {
+  width: 30%;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-button{
-  border : none ;
-  width: 2rem;
-  height: 1.5rem;
+.App-form input {
+  width: 85%;
+  height: 2rem;
+  font-size: 20px;
 }
 
-.add button {
-  background-color: inherit;
-  outline: none;
+.App-form button {
+  width: 20%;
+  height: 2.3rem;
+  font-size: 30px;
+  background: rgb(17, 170, 32);
+  color: white;
+  border: none;
+  margin: 2px;
 }
 
-.add button:hover {
-  color: rgb(75, 167, 41);
+.App-form button:hover {
+  background: rgb(8, 141, 48);
 }
 
-.search input {
-  border : 0;
-  outline: none;
-  padding: 20px;
-  font-size: 15px;
+.Todos {
+  width: 30%;
+  color: #ffffff;
 }
 
-.search button {
-  background-color: rgb(89, 174, 58);
-  padding: 5px;
-  border-radius: 5px;
-}
 
-.form {
-  cursor: pointer;
-  pointer-events: fill;
-}
-
-.searchIcone {
-pointer-events: fill;
-}

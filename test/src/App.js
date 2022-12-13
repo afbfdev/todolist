@@ -1,66 +1,41 @@
-import React, {useState} from 'react'
 import './App.css';
+import { useState } from 'react';
+import { useSelector, useDispatch } from "react-redux";
+import { addTodo, removeTodo } from "./Redux/Reducer";
+import TodoItem from './TodoItem';
 
 function App() {
-const [Recup,setRecup] = useState('');
-const [Task,setTask] = useState([{Task:'La premiere tache', status : false}]);
+  const [input, setInput] = useState("");
 
-const removeTache = (para) => {
-   const newtask = Task.filter(element =>element.Task !== para)
-  setTask(newtask)
-} 
+  const count = useSelector((state) => state.todo.count);
+  const todos = useSelector((state) => state.todo.todos);
+  const dispatch = useDispatch();
 
-let tache = 'tache'
-let lineThrough = 'barre'
-let noLine = 'nonBarre'
+  const handleAddTodo = (e) => {
+    e.preventDefault();
+    dispatch(addTodo(input));
+  };
 
+  const handleTodoDone = (id) => {
+    dispatch(removeTodo(id));
+  };
 
-return (
-  <div className="App">
-
-      <div className='search'>
-          <form className = 'form'>
-            <input type = 'text' placeholder='Short search' onChange = {
-               (e) => {
-              setTask([...Task.filter(n =>(n.Task.includes(e.target.value)))])
-              console.log(e.target.value)}
-            }>
-
-            </input>
-            <button className='searchIcone'><i className="fa-solid fa-magnifying-glass"></i></button>
-          </form>
-
-
-
+  return (
+    <div className="App">
+      <h1>TODO List</h1>
+      <form className="App-form" onSubmit={handleAddTodo}>
+        <input type="text" onInput={(e) => setInput(e.target.value)} />
+        <button type="submit">Add</button>
+      </form>
+      <div className="Todos">
+        {count > 0 &&
+          todos.map((todo) => (
+            <TodoItem key={todo.id} text={todo.text} id={todo.id} onCheck={handleTodoDone}/>
+            ))}
+        {count === 0 && <p>No todos</p>}
       </div>
-    {
-    Task.map((el) =>  
-    
-       (
-
-        <div className={tache}>
-          <p className={el.status === true ?  lineThrough :  noLine}> <input type='checkbox' onClick={()=> {
-                    setTask([...Task.map(num =>
-                      num.Task === el.Task ? {...num, status : !num.status} : num)])    
-                    console.log(Task)
-                  }} >
-
-         </input>{el.Task} <button className='del' onClick={()=>removeTache(el.Task)}><i className="fa-solid fa-trash"></i> </button></p>
-        </div>
-      )
-    )
-  }
-    <div className='add'>
-      <input type = 'text' placeholder = 'ecrire une tâche' onChange={(e) => {setRecup(e.target.value)}}/>
-
-      <button onClick={()=>{setTask([...Task, {Task:Recup}])
-      }}><i className="fa-regular fa-square-plus"></i></button>
     </div>
-
-
-  </div>
-     
-);
+  );
 }
 
 export default App;
